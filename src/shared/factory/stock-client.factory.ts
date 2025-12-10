@@ -1,6 +1,6 @@
 import { SdkType } from "../../config";
 import type { RestStockClient as MasterlinkStockClient } from "masterlink-sdk/marketdata/rest/stock/client";
-import type { RestStockClient as FubonStockClient } from "fubon-neo/marketdata/rest/stock/client";
+import type { RestStockClient as FubonStockClient } from "masterlink-sdk/marketdata/rest/stock/client";
 
 // 聯合類型，表示可能的股票客戶端類型
 export type StockClient = MasterlinkStockClient | FubonStockClient;

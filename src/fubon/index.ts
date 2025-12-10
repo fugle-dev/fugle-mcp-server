@@ -1,24 +1,23 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { FubonSDK } from "fubon-neo";
-import { RestStockClient } from "fubon-neo/marketdata/rest/stock/client";
 import { Account } from "fubon-neo/trade";
 import { registerAccountManagementTools } from "./account";
 import { registerTradeTools } from "./trade";
 import { registerSmartConditionTools } from "./smart-condition";
-import { SdkProvider } from "../shared/factory";
+import { SdkProvider, StockClient } from "../shared/factory";
 import { registerAllMarketDataTools } from "../shared/marketdata";
 
 export class FubonMcp {
   server: McpServer;
   sdk: FubonSDK;
-  stock: RestStockClient;
+  stock: StockClient;
   private accounts: Account[];
   targetAccount: Account;
 
   constructor(server: McpServer, certPath: string) {
     const { NATIONAL_ID, ACCOUNT, ACCOUNT_PASS, CERT_PASS, FUBON_URL } = process.env;
     this.server = server;
-    this.sdk = FUBON_URL ? new FubonSDK("30", "2", FUBON_URL) : new FubonSDK();
+    this.sdk = FUBON_URL ? new FubonSDK(30, 2, FUBON_URL) : new FubonSDK();
 
     const accountRes = this.sdk.login(
       NATIONAL_ID as string,
@@ -28,7 +27,7 @@ export class FubonMcp {
     );
 
     this.accounts = accountRes.data || [];
-
+    console.log(this.accounts);
     let account;
 
     if (ACCOUNT) {
@@ -55,11 +54,11 @@ export class FubonMcp {
     // 使用 SDK Provider 創建具有正確類型的 stock 客戶端
     const sdkProvider = SdkProvider.getInstance();
     const originalStock = this.sdk.marketdata.restClient.stock;
-    
+
     // 用工廠方法創建具有正確類型的客戶端
-    // 特別說明: typedStock 會同時具有 FubonStockClient 和 GenericStockClient 的類型
-    // 這確保了它有所需的所有方法，且返回類型正確
-    const typedStock = sdkProvider.createStockClient(originalStock);
+    // 注意: fubon-neo 使用 @fugle/marketdata，型別與 masterlink-sdk 略有差異
+    // 但實際 API 相容，使用 type assertion 處理
+    const typedStock = sdkProvider.createStockClient(originalStock as unknown as StockClient);
     this.stock = typedStock;
 
     registerAccountManagementTools(this.server, this.sdk, this.targetAccount);
