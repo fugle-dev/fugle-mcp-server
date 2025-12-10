@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.16](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.15...v0.0.16) (2025-12-10)
+
+
+### Features
+
+* **fubon:** add FUBON_URL env variable for custom SDK URL ([0826cd3](https://github.com/fugle-dev/fugle-mcp-server/commit/0826cd3b8e5721fe48a899148a5f9ff1eb45fe6c))
+
 ## [0.0.15](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.14...v0.0.15) (2025-06-24)
 
 
