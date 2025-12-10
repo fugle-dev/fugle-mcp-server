@@ -27,7 +27,7 @@ export class FubonMcp {
     );
 
     this.accounts = accountRes.data || [];
-    console.log(this.accounts);
+
     let account;
 
     if (ACCOUNT) {
