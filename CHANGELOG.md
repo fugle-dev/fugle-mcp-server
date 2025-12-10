@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.19](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.18...v0.0.19) (2025-12-10)
+
+
+### Bug Fixes
+
+* **docker:** update fubon-neo SDK to 2.2.6 in Dockerfile ([b79924f](https://github.com/fugle-dev/fugle-mcp-server/commit/b79924fd3e730186f65eed88a7064ce2449a4ec1))
+
 ## [0.0.18](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.17...v0.0.18) (2025-12-10)
 
 ## [0.0.17](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.16...v0.0.17) (2025-12-10)
