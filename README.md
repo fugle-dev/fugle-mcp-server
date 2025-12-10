@@ -46,6 +46,7 @@ docker pull fugle/mcp-server
 - `CERT_PATH`: 憑證檔案路徑
 - `ENABLE_ORDER`: 是否開啟下單功能（可選，預設為 false）
 - `ACCOUNT`: 如有多帳戶，可以使用此參數指定登入帳戶（可選，預設為第一個帳戶）
+- `FUBON_URL`: 富邦 SDK 連線 URL（可選，僅適用於 fubon，用於連線測試伺服器）
 
 ℹ️ 元富帳號範例 ： 592a12345678 ( 包含分公司代碼 )  
 ℹ️ 富邦帳號範例 ： 1234456 ( 不需包含分公司代碼 )
@@ -75,6 +76,8 @@ docker pull fugle/mcp-server
         "ENABLE_ORDER",
         "-e",
         "ACCOUNT",
+        "-e",
+        "FUBON_URL",
         "--mount", "type=bind,src=</path/to/cert.p12>,dst=/app/cert.p12",
         "fugle/mcp-server"
       ],

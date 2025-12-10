@@ -16,9 +16,9 @@ export class FubonMcp {
   targetAccount: Account;
 
   constructor(server: McpServer, certPath: string) {
-    const { NATIONAL_ID, ACCOUNT, ACCOUNT_PASS, CERT_PASS } = process.env;
+    const { NATIONAL_ID, ACCOUNT, ACCOUNT_PASS, CERT_PASS, FUBON_URL } = process.env;
     this.server = server;
-    this.sdk = new FubonSDK();
+    this.sdk = FUBON_URL ? new FubonSDK("30", "2", FUBON_URL) : new FubonSDK();
 
     const accountRes = this.sdk.login(
       NATIONAL_ID as string,
