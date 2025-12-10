@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.20](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.19...v0.0.20) (2025-12-10)
+
+
+### Bug Fixes
+
+* **fubon:** update fubon-neo-2.2.6.tgz package ([7a8e9ab](https://github.com/fugle-dev/fugle-mcp-server/commit/7a8e9abf4403894de29c6ddba39b66a93f85b9bb))
+
 ## [0.0.19](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.18...v0.0.19) (2025-12-10)
 
 
