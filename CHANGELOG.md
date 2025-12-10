@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.17](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.16...v0.0.17) (2025-12-10)
+
+
+### Features
+
+* **fubon:** upgrade fubon-neo SDK to 2.2.6 and fix type compatibility ([d4bfa3f](https://github.com/fugle-dev/fugle-mcp-server/commit/d4bfa3fc95dd76b043df5b70f4f076f455fab299))
+
 ## [0.0.16](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.15...v0.0.16) (2025-12-10)
 
 
