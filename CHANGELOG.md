@@ -1,5 +1,19 @@
 # Changelog
 
+# [0.1.0](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.20...v0.1.0) (2026-05-07)
+
+
+* feat(sdk)!: migrate masterlink-sdk to taishin-sdk 1.0.2 ([fb37bf6](https://github.com/fugle-dev/fugle-mcp-server/commit/fb37bf6afa60d10bfecd9a3c0250ea1edee4cbc7))
+
+
+### BREAKING CHANGES
+
+* SDK_TYPE 環境變數的值從 'masterlink' 改為 'taishin'。
+原本設定 SDK_TYPE='masterlink' 的使用者必須更新為 SDK_TYPE='taishin'。
+未設定 SDK_TYPE 的使用者不受影響（預設值同步更新）。
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
 ## [0.0.20](https://github.com/fugle-dev/fugle-mcp-server/compare/v0.0.19...v0.0.20) (2025-12-10)
 
 
