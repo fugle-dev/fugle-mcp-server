@@ -3,7 +3,7 @@ FROM --platform=linux/amd64 node:22.12 AS builder
 # Copy package files first
 COPY package.json package-lock.json /app/
 # Copy the SDK to the correct path
-COPY masterlink-sdk-1.0.0.tgz /app/
+COPY taishin-sdk-1.0.2.tgz /app/
 COPY fubon-neo-2.2.6.tgz /app/
 # Set working directory
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN npm install
 
 FROM --platform=linux/amd64 node:22 AS release
 
-COPY masterlink-sdk-1.0.0.tgz /app/
+COPY taishin-sdk-1.0.2.tgz /app/
 COPY fubon-neo-2.2.6.tgz /app/
 COPY --from=builder /app/build /app/build
 COPY --from=builder /app/package.json /app/package.json

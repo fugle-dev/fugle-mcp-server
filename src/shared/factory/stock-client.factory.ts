@@ -1,9 +1,12 @@
 import { SdkType } from "../../config";
-import type { RestStockClient as MasterlinkStockClient } from "masterlink-sdk/marketdata/rest/stock/client";
-import type { RestStockClient as FubonStockClient } from "masterlink-sdk/marketdata/rest/stock/client";
+import type { TaishinSDK } from "taishin-sdk";
+import type { FubonSDK } from "fubon-neo";
+
+type TaishinStockClient = NonNullable<TaishinSDK['marketdata']>['restClient']['stock'];
+type FubonStockClient = FubonSDK['marketdata']['restClient']['stock'];
 
 // 聯合類型，表示可能的股票客戶端類型
-export type StockClient = MasterlinkStockClient | FubonStockClient;
+export type StockClient = TaishinStockClient | FubonStockClient;
 
 /**
  * 通用股票客戶端類型定義
@@ -89,13 +92,13 @@ export class StockClientFactory {
   }
 
   /**
-   * 根據 SDK 類型判斷客戶端是否為 Masterlink
+   * 根據 SDK 類型判斷客戶端是否為 Taishin
    * @param sdkType SDK 類型
    * @param client 客戶端實例
-   * @returns 是否為 Masterlink 客戶端
+   * @returns 是否為 Taishin 客戶端
    */
-  static isMasterlinkClient(sdkType: SdkType, client: StockClient): client is MasterlinkStockClient {
-    return sdkType === 'masterlink';
+  static isTaishinClient(sdkType: SdkType, client: StockClient): client is TaishinStockClient {
+    return sdkType === 'taishin';
   }
 
   /**

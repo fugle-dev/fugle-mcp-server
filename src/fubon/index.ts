@@ -56,7 +56,7 @@ export class FubonMcp {
     const originalStock = this.sdk.marketdata.restClient.stock;
 
     // 用工廠方法創建具有正確類型的客戶端
-    // 注意: fubon-neo 使用 @fugle/marketdata，型別與 masterlink-sdk 略有差異
+    // 注意: fubon-neo 與 taishin-sdk 同樣使用 @fugle/marketdata，但 marketdata 屬性的可選性不同
     // 但實際 API 相容，使用 type assertion 處理
     const typedStock = sdkProvider.createStockClient(originalStock as unknown as StockClient);
     this.stock = typedStock;

@@ -1,12 +1,12 @@
 # SDK 工廠模式使用文檔
 
-本文檔說明如何使用 SDK 工廠模式在 Masterlink SDK 和 Fubon Neo SDK 之間切換，同時保持完整的類型安全。
+本文檔說明如何使用 SDK 工廠模式在 Taishin SDK 和 Fubon Neo SDK 之間切換，同時保持完整的類型安全。
 
 ## 關鍵概念
 
 ### 1. StockClient
 
-這是一個聯合類型，包含了 MasterlinkStockClient 和 FubonStockClient 的聚合。它允許我們用一個類型來表示不同的 SDK 客戶端，同時保留原始 SDK 的所有類型信息。
+這是一個聯合類型，包含了 TaishinStockClient 和 FubonStockClient 的聚合。它允許我們用一個類型來表示不同的 SDK 客戶端，同時保留原始 SDK 的所有類型信息。
 
 ### 2. StockClientFactory
 
@@ -21,8 +21,8 @@
 ### 1. 通過環境變數選擇 SDK
 
 ```bash
-# 使用 Masterlink SDK
-SDK_TYPE=masterlink node dist/index.js
+# 使用 Taishin SDK
+SDK_TYPE=taishin node dist/index.js
 
 # 使用 Fubon SDK
 SDK_TYPE=fubon node dist/index.js
@@ -46,7 +46,7 @@ const result = await typedStock.snapshot.quotes({
 });
 
 // result 會有原始 SDK 定義的返回類型
-// 例如，如果是 Masterlink SDK，那麼 result 的類型將是 MasterlinkStockClient 的返回類型
+// 例如，如果是 Taishin SDK，那麼 result 的類型將是 TaishinStockClient 的返回類型
 // 如果是 Fubon SDK，那麼 result 的類型將是 FubonStockClient 的返回類型
 ```
 
@@ -65,9 +65,9 @@ sdkProvider.setSdkType('fubon');
 ### 4. 類型判斷
 
 ```typescript
-if (sdkProvider.isMasterlinkClient(stock)) {
-  // TypeScript 知道這裡 stock 是 MasterlinkStockClient 類型
-  // 可以使用 Masterlink 特有的屬性和方法
+if (sdkProvider.isTaishinClient(stock)) {
+  // TypeScript 知道這裡 stock 是 TaishinStockClient 類型
+  // 可以使用 Taishin 特有的屬性和方法
 } else if (sdkProvider.isFubonClient(stock)) {
   // TypeScript 知道這裡 stock 是 FubonStockClient 類型
   // 可以使用 Fubon 特有的屬性和方法

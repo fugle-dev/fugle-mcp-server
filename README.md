@@ -20,7 +20,7 @@
 
 ## 申請憑證
 
-### 元富證券請使用 [線上憑證申請](https://ml-fugle-api.masterlink.com.tw/FugleSDK/docs/key/) 或下載 [憑證 e 管家](https://www.masterlink.com.tw/certificate-eoperation) 來申請憑證
+### 台新證券請使用 [線上憑證申請](https://ml-fugle-api.tssco.com.tw/FugleSDK/docs/key/) 或下載 [憑證 e 管家](https://www.masterlink.com.tw/certificate-eoperation) 來申請憑證
 ⚠️ 使用線上申請憑證之用戶，憑證密碼預設為您的身分證字號
 
 ### 富邦證券請下載 [TCEM 憑證管理工具](https://www.fbs.com.tw/Certificate/Management/) 來申請憑證
@@ -39,7 +39,7 @@ docker pull fugle/mcp-server
 ## 使用方法
 ### 環境變數
 伺服器需要以下環境變數：
-- `SDK_TYPE`: MCP Server 使用 SDK 類型（可選：「元富(masterlink)」或「富邦(fubon)」，預設為「元富(masterlink)」）
+- `SDK_TYPE`: MCP Server 使用 SDK 類型（可選：「台新(taishin)」或「富邦(fubon)」，預設為「台新(taishin)」）
 - `NATIONAL_ID`: 身分證字號
 - `ACCOUNT_PASS`: 帳戶密碼
 - `CERT_PASS`: 憑證密碼
@@ -48,7 +48,7 @@ docker pull fugle/mcp-server
 - `ACCOUNT`: 如有多帳戶，可以使用此參數指定登入帳戶（可選，預設為第一個帳戶）
 - `FUBON_URL`: 富邦 SDK 連線 URL（可選，僅適用於 fubon，用於連線測試伺服器）
 
-ℹ️ 元富帳號範例 ： 592a12345678 ( 包含分公司代碼 )  
+ℹ️ 台新帳號範例 ： 592a12345678 ( 包含分公司代碼 )  
 ℹ️ 富邦帳號範例 ： 1234456 ( 不需包含分公司代碼 )
 
 ### Docker 配置
@@ -82,7 +82,7 @@ docker pull fugle/mcp-server
         "fugle/mcp-server"
       ],
       "env": {
-        "SDK_TYPE": "masterlink|fubon",
+        "SDK_TYPE": "taishin|fubon",
         "NATIONAL_ID": "您的身分證字號",
         "ACCOUNT_PASS": "您的帳戶密碼",
         "CERT_PASS": "您的憑證密碼",
@@ -105,7 +105,7 @@ docker pull fugle/mcp-server
         "@fugle/mcp-server"
       ],
       "env": {
-        "SDK_TYPE": "masterlink|fubon",
+        "SDK_TYPE": "taishin|fubon",
         "NATIONAL_ID": "您的身分證字號",
         "ACCOUNT_PASS": "您的帳戶密碼",
         "CERT_PASS": "您的憑證密碼",

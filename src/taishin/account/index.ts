@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Account, MasterlinkSDK } from "masterlink-sdk";
+import { Account, TaishinSDK } from "taishin-sdk";
 
 // 匯出所有帳戶管理相關工具
 import { registerBankBalanceTools } from "./bank-balance";
@@ -26,7 +26,7 @@ export {
 // 定義一個函數來註冊所有帳戶管理工具
 export const registerAllAccountTools = async (
   server: McpServer,
-  sdk: MasterlinkSDK,
+  sdk: TaishinSDK,
   account: Account
 ) => {
   await registerBankBalanceTools(server, sdk, account);

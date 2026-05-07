@@ -1,17 +1,17 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Account, MasterlinkSDK } from "masterlink-sdk";
+import { Account, TaishinSDK } from "taishin-sdk";
 import { z } from "zod";
 import { loadToolMetadata, createToolHandler } from "../../shared/utils/index.js";
 
 /**
  * 註冊查詢歷史成交明細相關的工具到 MCP Server
  * @param {Object} server MCP Server 實例
- * @param {Object} sdk MasterlinkSDK 實例
+ * @param {Object} sdk TaishinSDK 實例
  * @param {Object} account 帳戶實例
  */
 export function registerFilledHistoryDetailTools(
   server: McpServer,
-  sdk: MasterlinkSDK,
+  sdk: TaishinSDK,
   account: Account
 ) {
   const currentDir = __dirname;

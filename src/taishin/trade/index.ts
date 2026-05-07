@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Account, MasterlinkSDK } from "masterlink-sdk";
+import { Account, TaishinSDK } from "taishin-sdk";
 
 // 導入所有交易相關工具
 import { registerAttentionStockTools } from "./get-attention-stock";
@@ -38,7 +38,7 @@ export {
 // 定義一個函數來註冊所有交易工具
 export const registerAllTradeTools = (
   server: McpServer,
-  sdk: MasterlinkSDK,
+  sdk: TaishinSDK,
   account: Account
 ) => {
   registerAttentionStockTools(server, sdk, account);

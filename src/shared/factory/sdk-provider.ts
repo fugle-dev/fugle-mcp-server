@@ -50,12 +50,12 @@ export class SdkProvider {
   }
 
   /**
-   * 檢查客戶端是否為 Masterlink
+   * 檢查客戶端是否為 Taishin
    * @param client 股票客戶端
-   * @returns 是否為 Masterlink 客戶端
+   * @returns 是否為 Taishin 客戶端
    */
-  isMasterlinkClient(client: StockClient): boolean {
-    return StockClientFactory.isMasterlinkClient(this.sdkType, client);
+  isTaishinClient(client: StockClient): boolean {
+    return StockClientFactory.isTaishinClient(this.sdkType, client);
   }
 
   /**

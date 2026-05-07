@@ -28,7 +28,7 @@
     "axios": "^1.9.0",
     "fubon-neo": "file:fubon-neo-2.2.6.tgz",
     "luxon": "^3.5.0",
-    "masterlink-sdk": "file:masterlink-sdk-1.0.0.tgz",
+    "taishin-sdk": "file:taishin-sdk-1.0.2.tgz",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -40,7 +40,7 @@
     "typescript": "^5.8.2"
   },
   "bundledDependencies": [
-    "masterlink-sdk",
+    "taishin-sdk",
     "fubon-neo"
   ],
   "publishConfig": {

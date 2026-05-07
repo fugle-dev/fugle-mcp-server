@@ -1,16 +1,16 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Account, MasterlinkSDK } from "masterlink-sdk";
+import { Account, TaishinSDK } from "taishin-sdk";
 import { loadToolMetadata, createToolHandler } from "../../shared/utils/index.js";
 
 /**
  * 註冊帳戶庫存與未實現損益查詢工具到 MCP Server
  * @param {Object} server MCP Server 實例
- * @param {Object} sdk MasterlinkSDK 實例
+ * @param {Object} sdk TaishinSDK 實例
  * @param {Object} account 帳戶實例
  */
 export function registerInventoriesTools(
   server: McpServer,
-  sdk: MasterlinkSDK,
+  sdk: TaishinSDK,
   account: Account
 ) {
   const currentDir = __dirname;

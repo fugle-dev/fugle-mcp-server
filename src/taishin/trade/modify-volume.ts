@@ -1,52 +1,41 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Account, MasterlinkSDK } from "masterlink-sdk";
+import { Account, TaishinSDK } from "taishin-sdk";
 import { z } from "zod";
-import { PriceType } from "masterlink-sdk";
 import { loadToolMetadata, createToolHandler } from "../../shared/utils/index.js";
 
 /**
- * 註冊修改委託單相關的工具到 MCP Server
+ * 註冊修改委託單數量相關的工具到 MCP Server
  * @param {Object} server MCP Server 實例
- * @param {Object} sdk MasterlinkSDK 實例
+ * @param {Object} sdk TaishinSDK 實例
  * @param {Object} account 帳戶實例
  */
-export function registerModifyOrderTools(
+export function registerModifyVolumeTools(
   server: McpServer,
-  sdk: MasterlinkSDK,
+  sdk: TaishinSDK,
   account: Account
 ) {
   const currentDir = __dirname;
-  const { description } = loadToolMetadata(currentDir, 'modify-price', '修改委託價格');
+  const { description } = loadToolMetadata(currentDir, 'modify-volume', '修改委託單數量');
   
-  // 修改委託價格工具
+  // 修改委託單數量工具
   server.tool(
-    "modify_price",
+    "modify_volume",
     description,
     {
       orderNo: z.string().optional().describe("委託書號，例如：f0002"),
       preOrderNo: z.string().optional().describe("委託書號，例如：f0002"),
       isPreOrder: z.boolean().default(false).describe("是否為預約單"),
-      price: z
-        .string()
-        .describe(
-          "修改後的委託價格，例如：14.5（市價、漲停、跌停等特殊價格類型時可為空）"
-        ),
-      priceType: z
-        .enum(["Limit", "Market", "LimitUp", "LimitDown", "Reference"])
-        .describe(
-          "價格類型：Limit 限價、Market 市價、LimitUp 漲停、LimitDown 跌停、Reference 平盤價"
-        ),
+      volume: z.number().describe("欲刪減的股數（設為0表示刪單）"),
     },
     createToolHandler(
       currentDir,
-      'modify-price',
-      async ({ orderNo, preOrderNo, isPreOrder, price, priceType }) => {
+      'modify-volume',
+      async ({ orderNo, preOrderNo, volume, isPreOrder }) => {
         if (process.env.ENABLE_ORDER !== "true") {
           throw new Error(
-            "修改委託價格功能已停用！(啟用此功能請在環境變數中設定 ENABLE_ORDER 為 true )"
+            "修改委託單數量功能已停用！(啟用此功能請在環境變數中設定 ENABLE_ORDER 為 true )"
           );
         }
-
         // 先獲取委託單資訊
         const orderResults = await sdk.stock.getOrderResults(account);
         const targetOrder = orderResults.find((order) => {
@@ -64,21 +53,19 @@ export function registerModifyOrderTools(
           );
         }
 
-        // 檢查委託單狀態
-        if (!targetOrder.canCancel) {
-          throw new Error(`修改委託價格失敗：委託單不可修改`);
+        if (isPreOrder) {
+          targetOrder.orderDate = targetOrder?.workDate;
         }
 
-        // 修改委託價格
-        return await sdk.stock.modifyPrice(
-          account,
-          targetOrder,
-          price || "",
-          priceType as PriceType
-        );
+        // 檢查委託單狀態
+        if (!targetOrder.canCancel) {
+          throw new Error(`修改委託單數量失敗：委託單不可修改`);
+        }
+        // 修改委託數量
+        return await sdk.stock.modifyVolume(account, targetOrder, volume);
       },
       {
-        errorMessage: "修改委託價格時發生錯誤"
+        errorMessage: "修改委託單數量時發生錯誤"
       }
     )
   );

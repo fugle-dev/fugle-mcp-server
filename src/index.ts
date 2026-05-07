@@ -3,7 +3,7 @@
 import fs from "fs";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { MasterlinkMcp } from "./masterlink";
+import { TaishinMcp } from "./taishin";
 
 import { version } from "../package.json";
 import { FubonMcp } from "./fubon";
@@ -60,8 +60,8 @@ class FugleMcpServer {
     // 根據設定選擇要使用的 SDK
     const sdkType = this.sdkProvider.getSdkType();
     
-    if (sdkType === 'masterlink') {
-      new MasterlinkMcp(this.server, certPath);
+    if (sdkType === 'taishin') {
+      new TaishinMcp(this.server, certPath);
     } else if (sdkType === 'fubon') {
       new FubonMcp(this.server, certPath);
     } else {

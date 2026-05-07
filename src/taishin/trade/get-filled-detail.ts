@@ -1,25 +1,25 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Account, MasterlinkSDK } from "masterlink-sdk";
+import { Account, TaishinSDK } from "taishin-sdk";
 import { z } from "zod";
 import { loadToolMetadata, createToolHandler } from "../../shared/utils/index.js";
 
 /**
- * 註冊查詢成交相關的工具到 MCP Server
+ * 註冊查詢成交明細相關的工具到 MCP Server
  * @param {Object} server MCP Server 實例
- * @param {Object} sdk MasterlinkSDK 實例
+ * @param {Object} sdk TaishinSDK 實例
  * @param {Object} account 帳戶實例
  */
-export function registerFilledQueryTools(
+export function registerFilledDetailTools(
   server: McpServer,
-  sdk: MasterlinkSDK,
+  sdk: TaishinSDK,
   account: Account
 ) {
   const currentDir = __dirname;
-  const { description } = loadToolMetadata(currentDir, 'get-filled', '查詢今日成交彙總');
+  const { description } = loadToolMetadata(currentDir, 'get-filled-detail', '查詢今日成交明細');
   
-  // 查詢今日成交彙總工具
+  // 查詢今日成交明細工具
   server.tool(
-    "get_filled",
+    "get_filled_detail",
     description,
     {
       symbol: z
@@ -29,13 +29,13 @@ export function registerFilledQueryTools(
     },
     createToolHandler(
       currentDir,
-      'get-filled',
+      'get-filled-detail',
       async ({ symbol }) => {
-        // 呼叫 SDK 獲取成交紀錄
-        return await sdk.stock.getFilled(account, symbol);
+        // 呼叫 SDK 獲取成交明細
+        return await sdk.stock.getFilledDetail(account, symbol);
       },
       {
-        errorMessage: "查詢成交紀錄時發生錯誤"
+        errorMessage: "查詢成交明細時發生錯誤"
       }
     )
   );
