@@ -20,7 +20,7 @@
 
 ## 申請憑證
 
-### 台新證券請使用 [線上憑證申請](https://ml-fugle-api.tssco.com.tw/FugleSDK/docs/key/) 或下載 [憑證 e 管家](https://www.masterlink.com.tw/certificate-eoperation) 來申請憑證
+### 台新證券請使用 [憑證 e 管家](https://www.tssco.com.tw/CAinfo) 來申請憑證
 ⚠️ 使用線上申請憑證之用戶，憑證密碼預設為您的身分證字號
 
 ### 富邦證券請下載 [TCEM 憑證管理工具](https://www.fbs.com.tw/Certificate/Management/) 來申請憑證
