@@ -26,7 +26,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.10.2",
     "axios": "^1.9.0",
-    "fubon-neo": "file:fubon-neo-2.2.6.tgz",
+    "fubon-neo": "file:fubon-neo-2.4.0.tgz",
     "luxon": "^3.5.0",
     "taishin-sdk": "file:taishin-sdk-1.0.2.tgz",
     "zod": "^3.22.4"
