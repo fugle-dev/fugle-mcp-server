@@ -62,12 +62,13 @@ Both SDKs are abstracted through the factory pattern in `src/shared/factory/` to
 - `ENABLE_ORDER` - Enable trading functionality (default: false)
 - `ACCOUNT` - Specific account selection for multi-account users
 - `FUBON_URL` - Fubon SDK connection URL (optional, `fubon` only)
+- `FUBON_API_KEY` - Fubon API Key; when set, logs in with `apikeyLogin` instead of `ACCOUNT_PASS` (optional, `fubon` only)
 - `FUGLE_API_URL` - Fugle API base URL override (optional, defaults to `https://www.fugle.tw/api/v2`)
 
 ## Local File Dependencies
 
 The project includes bundled SDK packages:
 - `taishin-sdk-1.0.2.tgz`
-- `fubon-neo-2.2.6.tgz`
+- `fubon-neo-2.4.0.tgz`
 
 These are installed as file dependencies and bundled with the NPM package.

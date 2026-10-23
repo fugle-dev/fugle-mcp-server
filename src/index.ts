@@ -13,7 +13,7 @@ import { config } from "./config";
 import { SdkProvider } from "./shared/factory";
 
 // 檢查環境變量
-const { NATIONAL_ID, NOTIONAL_ID, ACCOUNT_PASS, CERT_PASS } = process.env;
+const { NATIONAL_ID, NOTIONAL_ID, ACCOUNT_PASS, CERT_PASS, FUBON_API_KEY } = process.env;
 
 // 處理身分證號，優先使用 NATIONAL_ID
 const nationalId = NATIONAL_ID || NOTIONAL_ID;
@@ -27,10 +27,13 @@ if (!NATIONAL_ID && NOTIONAL_ID) {
   console.warn("\x1b[33m%s\x1b[0m", `Please use NATIONAL_ID instead.`);
 }
 
-if (!nationalId || !ACCOUNT_PASS || !CERT_PASS) {
+// 富邦可用 FUBON_API_KEY 取代帳戶密碼登入
+const useFubonApiKey = config.sdk.type === "fubon" && !!FUBON_API_KEY;
+
+if (!nationalId || (!ACCOUNT_PASS && !useFubonApiKey) || !CERT_PASS) {
   console.error("Required environment variables are missing.");
   console.error(
-    "Please provide either NATIONAL_ID or NOTIONAL_ID (deprecated), ACCOUNT_PASS, and CERT_PASS"
+    "Please provide either NATIONAL_ID or NOTIONAL_ID (deprecated), ACCOUNT_PASS (or FUBON_API_KEY for fubon), and CERT_PASS"
   );
   process.exit(1); // Exit with error code
 }

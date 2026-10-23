@@ -23,8 +23,8 @@
 ### 台新證券請使用 [憑證 e 管家](https://www.tssco.com.tw/CAinfo) 來申請憑證
 ⚠️ 使用線上申請憑證之用戶，憑證密碼預設為您的身分證字號
 
-### 富邦證券請下載 [TCEM 憑證管理工具](https://www.fbs.com.tw/Certificate/Management/) 來申請憑證
-⚠️ 此工具僅支援 windows 平台，若您使用 Mac or Linux 請先至 Windows 申請完後，再將檔案移轉到 Mac or Lixux 系統上
+### 富邦證券請至 [金鑰申請及管理](https://www.fbs.com.tw/TradeAPI/docs/key/) 頁面申請並匯出憑證
+在網頁上即可完成申請與匯出，Mac、Linux 也適用；同一頁面也可以新增 API Key
 
 ## 安裝
 
@@ -41,15 +41,17 @@ docker pull fugle/mcp-server
 伺服器需要以下環境變數：
 - `SDK_TYPE`: MCP Server 使用 SDK 類型（可選：「台新(taishin)」或「富邦(fubon)」，預設為「台新(taishin)」）
 - `NATIONAL_ID`: 身分證字號
-- `ACCOUNT_PASS`: 帳戶密碼
+- `ACCOUNT_PASS`: 帳戶密碼（富邦設定 `FUBON_API_KEY` 時可不填）
 - `CERT_PASS`: 憑證密碼
 - `CERT_PATH`: 憑證檔案路徑
 - `ENABLE_ORDER`: 是否開啟下單功能（可選，預設為 false）
 - `ACCOUNT`: 如有多帳戶，可以使用此參數指定登入帳戶（可選，預設為第一個帳戶）
 - `FUBON_URL`: 富邦 SDK 連線 URL（可選，僅適用於 fubon，用於連線測試伺服器）
+- `FUBON_API_KEY`: 富邦 API Key（可選，僅適用於 fubon，設定後以 API Key 登入）
 
 ℹ️ 台新帳號範例 ： 592a12345678 ( 包含分公司代碼 )  
-ℹ️ 富邦帳號範例 ： 1234456 ( 不需包含分公司代碼 )
+ℹ️ 富邦帳號範例 ： 1234456 ( 不需包含分公司代碼 )  
+ℹ️ 富邦使用 API Key 登入時，以 `FUBON_API_KEY` 取代 `ACCOUNT_PASS`，憑證與憑證密碼仍需設定
 
 ### Docker 配置
 
@@ -78,6 +80,8 @@ docker pull fugle/mcp-server
         "ACCOUNT",
         "-e",
         "FUBON_URL",
+        "-e",
+        "FUBON_API_KEY",
         "--mount", "type=bind,src=</path/to/cert.p12>,dst=/app/cert.p12",
         "fugle/mcp-server"
       ],

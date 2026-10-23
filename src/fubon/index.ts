@@ -15,16 +15,29 @@ export class FubonMcp {
   targetAccount: Account;
 
   constructor(server: McpServer, certPath: string) {
-    const { NATIONAL_ID, ACCOUNT, ACCOUNT_PASS, CERT_PASS, FUBON_URL } = process.env;
+    const { NATIONAL_ID, ACCOUNT, ACCOUNT_PASS, CERT_PASS, FUBON_URL, FUBON_API_KEY } = process.env;
     this.server = server;
     this.sdk = FUBON_URL ? new FubonSDK(30, 2, FUBON_URL) : new FubonSDK();
 
-    const accountRes = this.sdk.login(
-      NATIONAL_ID as string,
-      ACCOUNT_PASS as string,
-      certPath,
-      CERT_PASS as string
-    );
+    // 有設定 FUBON_API_KEY 時以 API Key 登入，否則使用帳戶密碼登入
+    const accountRes = FUBON_API_KEY
+      ? this.sdk.apikeyLogin(
+          NATIONAL_ID as string,
+          FUBON_API_KEY,
+          certPath,
+          CERT_PASS as string
+        )
+      : this.sdk.login(
+          NATIONAL_ID as string,
+          ACCOUNT_PASS as string,
+          certPath,
+          CERT_PASS as string
+        );
+
+    if (!accountRes.isSuccess) {
+      console.error(`Login failed: ${accountRes.message}`);
+      process.exit(1);
+    }
 
     this.accounts = accountRes.data || [];
 
