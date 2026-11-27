@@ -18,10 +18,18 @@
 ### 安裝 NPM
 到 Node.js 官方 [下載](https://nodejs.org/en/download) 對應的作業系統平台
 
+### 台新證券：完成事前準備
+使用台新證券前，請先完成 [事前準備](https://ml-fugle-api.tssco.com.tw/FugleSDK/docs/trading/prepare/) 頁面的全部步驟：
+1. 線上開戶
+2. 以憑證 e 管家申請並匯出憑證
+3. 簽署「API 使用風險暨聲明書」（簽署後隔一天生效）
+4. 用 SDK 執行一次 API 認證（`register_api_auth`）
+
+⚠️ 第 4 步要在啟動 MCP Server 前完成。尚未認證時 MCP Server 無法啟動，也就用不到 `register_api_auth` 工具。
+
 ## 申請憑證
 
 ### 台新證券請使用 [憑證 e 管家](https://www.tssco.com.tw/CAinfo) 來申請憑證
-⚠️ 使用線上申請憑證之用戶，憑證密碼預設為您的身分證字號
 
 ### 富邦證券請下載 [TCEM 憑證管理工具](https://www.fbs.com.tw/Certificate/Management/) 來申請憑證
 ⚠️ 此工具僅支援 windows 平台，若您使用 Mac or Linux 請先至 Windows 申請完後，再將檔案移轉到 Mac or Lixux 系統上
@@ -117,3 +125,16 @@ docker pull fugle/mcp-server
   }
 }
 ```
+
+## 啟動失敗排查
+
+MCP 用戶端只顯示 `Connection closed` 時，錯誤訊息會寫在 MCP Server 的 log。以 macOS 上的 Claude Code 為例，log 位於 `~/Library/Caches/claude-cli-nodejs/<專案路徑>/mcp-logs-<server 名稱>/`。
+
+台新證券常見錯誤：
+
+| 錯誤碼 | 原因 | 處理方式 |
+|---|---|---|
+| `OA0025` | 查不到「API 使用風險暨聲明書」的簽署紀錄 | 完成線上簽署，隔一天後再啟動 |
+| `A00007` | 尚未完成 API 認證 | 用 SDK 執行一次 `register_api_auth`（見 [事前準備](https://ml-fugle-api.tssco.com.tw/FugleSDK/docs/trading/prepare/)），再重新啟動 MCP Server |
+
+其他錯誤碼請見 [錯誤處理](https://ml-fugle-api.tssco.com.tw/FugleSDK/docs/trading/library/error/)。

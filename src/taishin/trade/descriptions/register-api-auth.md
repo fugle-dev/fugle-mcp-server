@@ -1,7 +1,7 @@
-# 元富 API 認證註冊
+# 台新 API 認證註冊
 
 ## API 用途
-元富 API 用戶首次使用時的認證註冊工具。解決下單時出現 "A00007: agreement not signed" 錯誤。
+台新 API 用戶首次使用時的認證註冊工具。解決下單時出現 "A00007: agreement not signed" 錯誤。
 
 ## 使用場景
 - 新用戶首次使用交易功能
